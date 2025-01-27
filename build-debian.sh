@@ -14,8 +14,10 @@ apt update && apt install -y \
     fuse libgdk-pixbuf2.0-dev meson gettext itstool git gzip lintian
 
 # Clone the repository
-git clone --branch v$RELEASE_VERSION https://gitlab.gnome.org/World/pika-backup.git .
+rm -rf pika-backup
+git clone --branch v$RELEASE_VERSION https://gitlab.gnome.org/World/pika-backup.git pika-backup
 
+cd pika-backup
 mkdir -p AppDir
 meson setup build --wipe --prefix=/usr
 ninja -C build
@@ -28,7 +30,7 @@ pika-backup ($RELEASE_VERSION) unstable; urgency=medium
 
   * Custom Debian release
 
- -- albilu  $(date -R)
+ -- albilu <albilu@github.com>  $(date -R)
 EOF
 
 # Create copyright
@@ -45,9 +47,10 @@ strip AppDir/usr/bin/pika-backup
 strip AppDir/usr/bin/pika-backup-monitor
 
 # Set proper permissions
-cp -r DEBIAN AppDir/
+cp -r ../DEBIAN AppDir/
 chmod 755 AppDir/DEBIAN
 chmod 644 AppDir/DEBIAN/control
+chmod 644 AppDir/DEBIAN/conffiles
 
 # Build the package
 dpkg-deb --build AppDir pika-backup_${RELEASE_VERSION}_amd64.deb

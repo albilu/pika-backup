@@ -1,7 +1,7 @@
 Package: pika-backup
 Version: 0.7.4
 Architecture: amd64
-Maintainer: albilu
+Maintainer: albilu <albilu@github.com>
 Depends: libgtk-4-1 (>= 4.12.5), libadwaita-1-0 (>= 1.4.0), libc6, borgbackup
 Section: utils
 Priority: optional
