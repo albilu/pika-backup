@@ -1,4 +1,4 @@
-# Pika Backup (Debian)
+# Pika Backup For Debian
 
 [![Build Status](https://github.com/albilu/pika-backup/workflows/Build/badge.svg)](https://github.com/albilu/pika-backup/actions)
 
