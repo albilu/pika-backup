@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/albilu/pika-backup/workflows/Build/badge.svg)](https://github.com/albilu/pika-backup/actions)
 
-This Repository fetches original source (https://gitlab.gnome.org/World/pika-backup) and create corresponding Debian package/Appimage for Pika Backup: Best Backup Utility for Linux but missing alternative packaging to flatpak.
+This Repository fetches original source (https://gitlab.gnome.org/World/pika-backup) and create corresponding Debian package/Appimage for Pika Backup (Best Backup Utility for Linux but missing alternative packaging to flatpak).
 
 ## Available Packages
 
