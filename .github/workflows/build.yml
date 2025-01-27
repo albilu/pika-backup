@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    # container:
+    #   image: ubuntu:latest
+    #   options: --privileged
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Debian package
+      run: |
+        chmod +x build-debian.sh
+        ./build-debian.sh
+        
+    # - name: Build AppImage
+    #   run: |
+    #     chmod +x build-packages.sh
+    #     ./build-packages.sh
+        
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
+        tag_name: ${{ env.RELEASE_VERSION }}
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Attach DEB package
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: pika-backup_${{ env.RELEASE_VERSION }}_amd64.deb
+        asset_name: pika-backup_${{ env.RELEASE_VERSION }}_amd64.deb
+        asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
